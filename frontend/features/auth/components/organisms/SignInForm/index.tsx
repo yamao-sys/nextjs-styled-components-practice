@@ -1,6 +1,6 @@
 'use client';
 
-import { InputTextForm } from '@/components/atoms/InputForm';
+import { InputTextForm } from '@/components/atoms/InputTextForm';
 import { postSignIn } from '@/features/auth/server_actions/postSignIn';
 import { redirectToTopPage } from '@/features/todos/server_actions/redirectToTopPage';
 import { handleApiErrors } from '@/lib/handleApiErrors';

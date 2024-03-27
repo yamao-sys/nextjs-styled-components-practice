@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { InputTextForm } from '@/components/atoms/InputForm';
 import { postSignUp } from '@/features/auth/server_actions/postSignUp';
 import { HTTPError } from '@aspida/fetch';
 import { handleApiErrors } from '@/lib/handleApiErrors';
+import { BaseLayout } from '../BaseLayout';
+import { InputForm } from '@/components/molecules/InputForm';
+import { BaseButton } from '@/components/atoms/BaseButton';
+import { ValidationErrorBox } from '@/components/atoms/ValidationErrorBox';
 
 export default function SignUpForm() {
 	const [inputEmail, setInputEmail] = useState('');
@@ -43,26 +46,25 @@ export default function SignUpForm() {
 
 	return (
 		<>
-			<div>
-				{!!validationErrors &&
-					validationErrors.map((validationError, i) => (
-						<div key={i}>{validationError}</div>
-					))}
-				<InputTextForm
+			<BaseLayout title="会員登録">
+				{!!validationErrors.length && (
+					<ValidationErrorBox messages={validationErrors} />
+				)}
+				<InputForm
 					name="email"
-					placeholder="Email"
+					placeholder="例) test@example.com"
 					value={inputEmail}
 					onChange={handleChangeInputEmail}
 				/>
-				<InputTextForm
+				<InputForm
 					type="password"
 					name="password"
 					placeholder="Password"
 					value={inputPassword}
 					onChange={handleChangeInputPassword}
 				/>
-				<button onClick={handleSignUp}>登録する</button>
-			</div>
+				<BaseButton title="登録する" onClick={handleSignUp} />
+			</BaseLayout>
 		</>
 	);
 }
