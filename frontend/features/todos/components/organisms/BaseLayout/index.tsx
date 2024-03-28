@@ -1,7 +1,8 @@
-import { Container } from '@/components/organisms/Container';
-import { ContentWrapper } from '@/components/organisms/ContentWrapper';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
+import { Container } from '@/components/organisms/Container';
+import { ContentWrapper } from '@/components/organisms/ContentWrapper';
+import { TodoNavigationHeader } from '../../molecules/TodoNavigationHeader';
 
 type Props = {
 	title: string;
@@ -12,6 +13,7 @@ export const BaseLayout = ({ title, children }: Props) => {
 	return (
 		<>
 			<Container>
+				<TodoNavigationHeader />
 				<Title>{title}</Title>
 				<ContentWrapper>{children}</ContentWrapper>
 			</Container>
@@ -20,5 +22,6 @@ export const BaseLayout = ({ title, children }: Props) => {
 };
 
 const Title = styled.h1`
+	margin-top: 40px;
 	text-align: center;
 `;

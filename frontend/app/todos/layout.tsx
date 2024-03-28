@@ -1,4 +1,3 @@
-import TodoNavigationHeader from '@/features/todos/components/TodoNavigationHeader';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -17,7 +16,6 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<TodoNavigationHeader />
 				<div style={{ marginTop: '16px' }}>{children}</div>
 			</body>
 		</html>

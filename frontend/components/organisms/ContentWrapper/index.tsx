@@ -1,5 +1,3 @@
-'use client';
-
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
@@ -7,14 +5,19 @@ type Props = {
 	children: ReactNode;
 };
 
-export function BaseStack({ children }: Props) {
-	return <Stack>{children}</Stack>;
-}
+export const ContentWrapper = ({ children }: Props) => {
+	return (
+		<>
+			<Wrapper>{children}</Wrapper>
+		</>
+	);
+};
 
-const Stack = styled.div`
+const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 20px;
+	margin-top: 40px;
+	gap: 30px;
 `;

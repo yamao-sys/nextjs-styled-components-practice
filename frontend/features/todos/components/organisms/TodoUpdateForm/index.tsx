@@ -6,6 +6,11 @@ import { putUpdateTodo } from '@/features/todos/server_actions/putUpdateTodo';
 import { HTTPError } from '@aspida/fetch';
 import { handleApiErrors } from '@/lib/handleApiErrors';
 import { redirectToTopPage } from '@/features/todos/server_actions/redirectToTopPage';
+import { BaseLayout } from '../BaseLayout';
+import { ValidationErrorBox } from '@/components/atoms/ValidationErrorBox';
+import { InputForm } from '@/components/molecules/InputForm';
+import { TextAreaForm } from '@/features/auth/components/atoms/TextAreaForm';
+import { BaseButton } from '@/components/atoms/BaseButton';
 
 type Props = {
 	id: string;
@@ -48,30 +53,24 @@ export function TodoUpdateForm({ id, todo }: Props) {
 
 	return (
 		<>
-			{!!validationErrors &&
-				validationErrors.map((validationError, i) => (
-					<div key={i}>{validationError}</div>
-				))}
-			<div>
-				<input
-					type="text"
-					name="title"
-					placeholder="Title"
+			<BaseLayout title="Todo編集">
+				{!!validationErrors.length && (
+					<ValidationErrorBox messages={validationErrors} />
+				)}
+				<InputForm
+					name="text"
+					placeholder="Todo Title"
 					value={inputTitle}
 					onChange={handleChangeInputTitle}
 				/>
-			</div>
-			<div>
-				<textarea
+				<TextAreaForm
 					name="content"
-					placeholder="Content"
+					placeholder="Todo Content"
 					value={inputContent}
 					onChange={handleChangeInputContent}
 				/>
-			</div>
-			<div>
-				<button onClick={handleSubmit}>保存する</button>
-			</div>
+				<BaseButton title="保存する" onClick={handleSubmit} />
+			</BaseLayout>
 		</>
 	);
 }

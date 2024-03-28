@@ -1,11 +1,14 @@
 'use client';
 
-import { InputTextForm } from '@/components/atoms/InputTextForm';
 import { postSignIn } from '@/features/auth/server_actions/postSignIn';
 import { redirectToTopPage } from '@/features/todos/server_actions/redirectToTopPage';
 import { handleApiErrors } from '@/lib/handleApiErrors';
 import { HTTPError } from '@aspida/fetch';
 import { useState } from 'react';
+import { BaseLayout } from '../BaseLayout';
+import { ValidationErrorBox } from '@/components/atoms/ValidationErrorBox';
+import { InputForm } from '@/components/molecules/InputForm';
+import { BaseButton } from '@/components/atoms/BaseButton';
 
 export default function SignInForm() {
 	const [inputEmail, setInputEmail] = useState('');
@@ -44,25 +47,25 @@ export default function SignInForm() {
 
 	return (
 		<>
-			<div>
-				{!!validationErrors &&
-					validationErrors.map((validationError, i) => (
-						<div key={i}>{validationError}</div>
-					))}
-				<InputTextForm
+			<BaseLayout title="ログイン">
+				{!!validationErrors.length && (
+					<ValidationErrorBox messages={validationErrors} />
+				)}
+				<InputForm
 					name="email"
-					placeholder="Email"
+					placeholder="例) test@example.com"
 					value={inputEmail}
 					onChange={handleChangeInputEmail}
 				/>
-				<InputTextForm
+				<InputForm
+					type="password"
 					name="password"
 					placeholder="Password"
 					value={inputPassword}
 					onChange={handleChangeInputPassword}
 				/>
-				<button onClick={handleSignIn}>ログインする</button>
-			</div>
+				<BaseButton title="ログインする" onClick={handleSignIn} />
+			</BaseLayout>
 		</>
 	);
 }

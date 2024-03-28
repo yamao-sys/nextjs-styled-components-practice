@@ -5,6 +5,11 @@ import { useState } from 'react';
 import { HTTPError } from '@aspida/fetch';
 import { handleApiErrors } from '@/lib/handleApiErrors';
 import { redirectToTopPage } from '@/features/todos/server_actions/redirectToTopPage';
+import { BaseLayout } from '../BaseLayout';
+import { InputForm } from '@/components/molecules/InputForm';
+import { TextAreaForm } from '@/features/auth/components/atoms/TextAreaForm';
+import { BaseButton } from '@/components/atoms/BaseButton';
+import { ValidationErrorBox } from '@/components/atoms/ValidationErrorBox';
 
 export function TodoCreateForm() {
 	const [inputTitle, setInputTitle] = useState('');
@@ -42,30 +47,24 @@ export function TodoCreateForm() {
 
 	return (
 		<>
-			{!!validationErrors &&
-				validationErrors.map((validationError, i) => (
-					<div key={i}>{validationError}</div>
-				))}
-			<div>
-				<input
-					type="text"
-					name="title"
-					placeholder="Title"
+			<BaseLayout title="Todo新規作成">
+				{!!validationErrors.length && (
+					<ValidationErrorBox messages={validationErrors} />
+				)}
+				<InputForm
+					name="text"
+					placeholder="Todo Title"
 					value={inputTitle}
 					onChange={handleChangeInputTitle}
 				/>
-			</div>
-			<div>
-				<textarea
+				<TextAreaForm
 					name="content"
-					placeholder="Content"
+					placeholder="Todo Content"
 					value={inputContent}
 					onChange={handleChangeInputContent}
 				/>
-			</div>
-			<div>
-				<button onClick={handleSubmit}>登録する</button>
-			</div>
+				<BaseButton title="登録する" onClick={handleSubmit} />
+			</BaseLayout>
 		</>
 	);
 }
