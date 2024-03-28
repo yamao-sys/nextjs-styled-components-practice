@@ -25,9 +25,9 @@ export const NavigationLink = ({
 	return (
 		<>
 			<Navigation
-				width={width}
-				backgroundColor={backgroundColor}
-				hoveredBackgroundColor={hoveredBackgroundColor}
+				$width={width}
+				$backgroundColor={backgroundColor}
+				$hoveredBackgroundColor={hoveredBackgroundColor}
 				href={href}
 			>
 				{title}
@@ -37,24 +37,24 @@ export const NavigationLink = ({
 };
 
 const Navigation = styled(Link)<{
-	width: CssProps['width'];
-	backgroundColor: CssProps['backgroundColor'];
-	hoveredBackgroundColor: CssProps['hoveredBackgroundColor'];
+	$width: CssProps['width'];
+	$backgroundColor: CssProps['backgroundColor'];
+	$hoveredBackgroundColor: CssProps['hoveredBackgroundColor'];
 }>`
 	display: block;
-	width: ${({ width }) => (width ? width : '140px')};
+	width: ${({ $width }) => ($width ? $width : '140px')};
 	height: 40px;
 	text-align: center;
 	padding: 10px 10px;
-	background-color: ${({ backgroundColor }) =>
-		backgroundColor ? backgroundColor : '#32b7f0'};
+	background-color: ${({ $backgroundColor }) =>
+		$backgroundColor ? $backgroundColor : '#32b7f0'};
 	border-radius: 10px;
 	font-weight: 700;
 	color: #fff;
 	transition: 0.3s;
 
 	&:hover {
-		background-color: ${({ hoveredBackgroundColor }) =>
-			hoveredBackgroundColor ? hoveredBackgroundColor : '#87ceeb'};
+		background-color: ${({ $hoveredBackgroundColor }) =>
+			$hoveredBackgroundColor ? $hoveredBackgroundColor : '#87ceeb'};
 	}
 `;
