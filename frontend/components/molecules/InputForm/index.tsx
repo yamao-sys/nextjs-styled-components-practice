@@ -1,4 +1,5 @@
 import { InputTextForm } from '@/components/atoms/InputTextForm';
+import { theme } from '@/styles/theme';
 import styled from 'styled-components';
 
 type Props = {
@@ -30,5 +31,6 @@ export const InputForm = ({
 };
 
 const Wrapper = styled.div`
-	width: 75%;
+	width: ${({ theme }) => theme.size.threeQuarters};
 `;
+Wrapper.defaultProps = { theme: theme };

@@ -6,18 +6,8 @@ import styled from 'styled-components';
 export const TodoNavigationHeader = () => {
 	return (
 		<Wrapper>
-			<NavigationLink
-				href="/todos"
-				title="TOP"
-				backgroundColor="#32b7f0"
-				hoveredBackgroundColor="#87ceeb"
-			/>
-			<NavigationLink
-				href="/todos/new"
-				title="新規作成"
-				backgroundColor="#32b7f0"
-				hoveredBackgroundColor="#87ceeb"
-			/>
+			<NavigationLink href="/todos" title="TOP" />
+			<NavigationLink href="/todos/new" title="新規作成" />
 		</Wrapper>
 	);
 };

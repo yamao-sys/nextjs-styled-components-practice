@@ -4,8 +4,9 @@ import { FetchAllTodosResponseDto } from '@/api/todos/@types';
 import { deleteTodo } from '@/features/todos/server_actions/deleteTodo';
 import { useState } from 'react';
 import { BaseLayout } from '../BaseLayout';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { NavigationLink } from '@/components/atoms/NavigationLink';
+import { theme } from '@/styles/theme';
 
 type Props = {
 	todos: FetchAllTodosResponseDto['todos'];
@@ -27,83 +28,93 @@ export function TodoList({ todos }: Props) {
 
 	return (
 		<>
-			<BaseLayout title="Todoリスト">
-				{!!showTodos?.length ? (
-					showTodos.map((todo) => (
-						<TodoRow key={todo.id}>
-							<TodoTitleWrapper>
-								<TodoTitle>{todo.title}</TodoTitle>
-							</TodoTitleWrapper>
-							<ButtonsWrapper>
-								<NavigationLink
-									href={`/todos/edit/${todo.id}`}
-									title="編集"
-									width="80px"
-									backgroundColor="#66cc33"
-									hoveredBackgroundColor="#66cc66"
-								/>
-								<DeleteButton
-									onClick={() => handleDeleteTodo(todo.id, todo.title)}
-								>
-									削除
-								</DeleteButton>
-							</ButtonsWrapper>
-						</TodoRow>
-					))
-				) : (
-					<NotExistsTodosNotion>※ まだTODOが未登録です</NotExistsTodosNotion>
-				)}
-			</BaseLayout>
+			<ThemeProvider theme={theme}>
+				<BaseLayout title="Todoリスト">
+					{!!showTodos?.length ? (
+						showTodos.map((todo) => (
+							<TodoRow key={todo.id}>
+								<TodoTitleWrapper>
+									<TodoTitle>{todo.title}</TodoTitle>
+								</TodoTitleWrapper>
+								<ButtonsWrapper>
+									<NavigationLink
+										href={`/todos/edit/${todo.id}`}
+										title="編集"
+										width="p80"
+										backgroundColor="subtleSuccess"
+										hoveredBackgroundColor="paleSuccess"
+									/>
+									<DeleteButton
+										onClick={() => handleDeleteTodo(todo.id, todo.title)}
+									>
+										削除
+									</DeleteButton>
+								</ButtonsWrapper>
+							</TodoRow>
+						))
+					) : (
+						<NotExistsTodosNotion>※ まだTODOが未登録です</NotExistsTodosNotion>
+					)}
+				</BaseLayout>
+			</ThemeProvider>
 		</>
 	);
 }
 
 const NotExistsTodosNotion = styled.span`
-	font-weight: 700;
+	font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
+NotExistsTodosNotion.defaultProps = { theme: theme };
 
 const TodoRow = styled.div`
 	display: flex;
-	width: 100%;
-	padding: 20px;
-	border: 1px solid #66ccff;
-	border-radius: 10px;
+	width: ${({ theme }) => theme.size.full};
+	padding: ${({ theme }) => theme.size.p20};
+	border: ${({ theme }) => theme.border.primarySolid.size}
+		${({ theme }) => theme.border.primarySolid.type}
+		${({ theme }) => theme.border.primarySolid.color};
+	border-radius: ${({ theme }) => theme.size.p10};
 `;
+TodoRow.defaultProps = { theme: theme };
 
 const TodoTitleWrapper = styled.div`
 	display: flex;
 	align-items: center;
-	width: 50%;
+	width: ${({ theme }) => theme.size.half};
 `;
+TodoTitleWrapper.defaultProps = { theme: theme };
 
 const TodoTitle = styled.span`
 	display: block;
-	font-weight: 700;
+	font-weight: ${({ theme }) => theme.fontWeight.bold};
 `;
+TodoTitle.defaultProps = { theme: theme };
 
 const ButtonsWrapper = styled.div`
 	display: flex;
 	justify-content: end;
-	width: 50%;
+	width: ${({ theme }) => theme.size.half};
 `;
+ButtonsWrapper.defaultProps = { theme: theme };
 
 const DeleteButton = styled.button`
 	display: block;
-	width: 80px;
-	height: 40px;
-	background-color: #ff6666;
+	width: ${({ theme }) => theme.size.p80};
+	height: ${({ theme }) => theme.size.p40};
+	background-color: ${({ theme }) => theme.color.subtleDanger};
 	border: none;
 	outline: none;
-	margin-left: 10px;
-	padding: 10px;
-	font-size: 16px;
-	font-weight: 700;
-	color: #fff;
+	margin-left: ${({ theme }) => theme.size.p10};
+	padding: ${({ theme }) => theme.size.p10};
+	font-size: ${({ theme }) => theme.size.p16};
+	font-weight: ${({ theme }) => theme.fontWeight.bold};
+	color: ${({ theme }) => theme.color.white};
 	appearance: none;
-	border-radius: 10px;
-	transition: 0.3s;
+	border-radius: ${({ theme }) => theme.size.p10};
+	transition: ${({ theme }) => theme.transition.normal};
 
 	&:hover {
-		background-color: #cc6666;
+		background-color: ${({ theme }) => theme.color.paleDanger};
 	}
 `;
+DeleteButton.defaultProps = { theme: theme };

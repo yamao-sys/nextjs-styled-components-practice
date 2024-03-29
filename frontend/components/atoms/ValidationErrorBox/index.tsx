@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from 'styled-components';
 
 type Props = {
@@ -15,12 +16,14 @@ export const ValidationErrorBox = ({ messages }: Props) => {
 };
 
 const Wrapper = styled.div`
-	width: 75%;
-	background-color: #ff9e9c;
-	border-radius: 5px;
-	padding: 10px;
+	width: ${({ theme }) => theme.size.threeQuarters}
+	background-color: ${({ theme }) => theme.color.lightDanger};
+	border-radius: ${({ theme }) => theme.size.p5};
+	padding: ${({ theme }) => theme.size.p10};
 `;
+Wrapper.defaultProps = { theme: theme };
 
 const Text = styled.p`
-	color: #fff;
+	color: ${({ theme }) => theme.color.white};
 `;
+Text.defaultProps = { theme: theme };

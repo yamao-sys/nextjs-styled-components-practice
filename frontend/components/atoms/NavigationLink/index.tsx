@@ -1,10 +1,12 @@
+import { theme } from '@/styles/theme';
 import Link from 'next/link';
 import styled from 'styled-components';
 
 type CssProps = {
-	width?: string;
-	backgroundColor?: string;
-	hoveredBackgroundColor?: string;
+	// ここの型をthemeに沿ったunionにする
+	width: 'p80' | 'p140';
+	backgroundColor?: 'normalPrimary' | 'subtleSuccess';
+	hoveredBackgroundColor: 'palePrimary' | 'paleSuccess';
 };
 
 type Props = {
@@ -18,9 +20,9 @@ type Props = {
 export const NavigationLink = ({
 	href,
 	title,
-	width,
+	width = 'p140',
 	backgroundColor,
-	hoveredBackgroundColor,
+	hoveredBackgroundColor = 'palePrimary',
 }: Props) => {
 	return (
 		<>
@@ -42,19 +44,22 @@ const Navigation = styled(Link)<{
 	$hoveredBackgroundColor: CssProps['hoveredBackgroundColor'];
 }>`
 	display: block;
-	width: ${({ $width }) => ($width ? $width : '140px')};
-	height: 40px;
+	width: ${({ theme, $width }) => theme.size[$width]};
+	height: ${({ theme }) => theme.size.p40};
 	text-align: center;
-	padding: 10px 10px;
-	background-color: ${({ $backgroundColor }) =>
-		$backgroundColor ? $backgroundColor : '#32b7f0'};
-	border-radius: 10px;
-	font-weight: 700;
-	color: #fff;
-	transition: 0.3s;
+	padding: ${({ theme }) => theme.size.p10};
+	background-color: ${({ theme, $backgroundColor }) =>
+		$backgroundColor
+			? theme.color[$backgroundColor]
+			: theme.color.normalPrimary};
+	border-radius: ${({ theme }) => theme.size.p10};
+	font-weight: ${({ theme }) => theme.fontWeight.bold};
+	color: ${({ theme }) => theme.color.white};
+	transition: ${({ theme }) => theme.transition.normal};
 
 	&:hover {
-		background-color: ${({ $hoveredBackgroundColor }) =>
-			$hoveredBackgroundColor ? $hoveredBackgroundColor : '#87ceeb'};
+		background-color: ${({ theme, $hoveredBackgroundColor }) =>
+			theme.color[$hoveredBackgroundColor]};
 	}
 `;
+Navigation.defaultProps = { theme: theme };

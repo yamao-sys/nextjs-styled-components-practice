@@ -1,5 +1,6 @@
 'use client';
 
+import { theme } from '@/styles/theme';
 import styled from 'styled-components';
 
 type Props = {
@@ -32,15 +33,18 @@ export function InputTextForm({
 
 const Input = styled.input`
 	display: block;
-	width: 100%;
-	height: 50px;
-	border-radius: 8px;
-	border: 1px solid #707070;
+	width: ${({ theme }) => theme.size.full};
+	height: ${({ theme }) => theme.size.half};
+	border-radius: ${({ theme }) => theme.size.p8};
+	border: ${({ theme }) => theme.border.normalSolid.size}
+		${({ theme }) => theme.border.normalSolid.type}
+		${({ theme }) => theme.border.normalSolid.color};
 	outline: none;
-	padding: 10px;
-	font-size: 20px;
+	padding: ${({ theme }) => theme.size.p10};
+	font-size: ${({ theme }) => theme.size.p20};
 
 	::placeholder {
-		color: #f5f5f5;
+		color: ${({ theme }) => theme.color.subtleGray};
 	}
 `;
+Input.defaultProps = { theme: theme };

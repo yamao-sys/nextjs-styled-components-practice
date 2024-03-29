@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
@@ -14,6 +15,7 @@ export const Container = ({ children }: Props) => {
 };
 
 const ContainerWrapper = styled.div`
-	width: 50%;
-	margin: 80px auto;
+	width: ${({ theme }) => theme.size.half};
+	margin: ${({ theme }) => theme.size.p80} auto;
 `;
+ContainerWrapper.defaultProps = { theme: theme };

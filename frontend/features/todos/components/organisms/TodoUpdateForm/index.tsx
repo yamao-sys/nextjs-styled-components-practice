@@ -11,6 +11,8 @@ import { ValidationErrorBox } from '@/components/atoms/ValidationErrorBox';
 import { InputForm } from '@/components/molecules/InputForm';
 import { TextAreaForm } from '@/features/auth/components/atoms/TextAreaForm';
 import { BaseButton } from '@/components/atoms/BaseButton';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '@/styles/theme';
 
 type Props = {
 	id: string;
@@ -53,24 +55,26 @@ export function TodoUpdateForm({ id, todo }: Props) {
 
 	return (
 		<>
-			<BaseLayout title="Todo編集">
-				{!!validationErrors.length && (
-					<ValidationErrorBox messages={validationErrors} />
-				)}
-				<InputForm
-					name="text"
-					placeholder="Todo Title"
-					value={inputTitle}
-					onChange={handleChangeInputTitle}
-				/>
-				<TextAreaForm
-					name="content"
-					placeholder="Todo Content"
-					value={inputContent}
-					onChange={handleChangeInputContent}
-				/>
-				<BaseButton title="保存する" onClick={handleSubmit} />
-			</BaseLayout>
+			<ThemeProvider theme={theme}>
+				<BaseLayout title="Todo編集">
+					{!!validationErrors.length && (
+						<ValidationErrorBox messages={validationErrors} />
+					)}
+					<InputForm
+						name="text"
+						placeholder="Todo Title"
+						value={inputTitle}
+						onChange={handleChangeInputTitle}
+					/>
+					<TextAreaForm
+						name="content"
+						placeholder="Todo Content"
+						value={inputContent}
+						onChange={handleChangeInputContent}
+					/>
+					<BaseButton title="保存する" onClick={handleSubmit} />
+				</BaseLayout>
+			</ThemeProvider>
 		</>
 	);
 }

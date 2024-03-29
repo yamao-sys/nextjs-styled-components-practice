@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
@@ -18,6 +19,7 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-top: 40px;
-	gap: 30px;
+	margin-top: ${({ theme }) => theme.size.p40};
+	gap: ${({ theme }) => theme.size.p30};
 `;
+Wrapper.defaultProps = { theme: theme };

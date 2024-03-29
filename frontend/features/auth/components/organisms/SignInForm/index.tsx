@@ -9,6 +9,8 @@ import { BaseLayout } from '../BaseLayout';
 import { ValidationErrorBox } from '@/components/atoms/ValidationErrorBox';
 import { InputForm } from '@/components/molecules/InputForm';
 import { BaseButton } from '@/components/atoms/BaseButton';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '@/styles/theme';
 
 export default function SignInForm() {
 	const [inputEmail, setInputEmail] = useState('');
@@ -47,25 +49,27 @@ export default function SignInForm() {
 
 	return (
 		<>
-			<BaseLayout title="ログイン">
-				{!!validationErrors.length && (
-					<ValidationErrorBox messages={validationErrors} />
-				)}
-				<InputForm
-					name="email"
-					placeholder="例) test@example.com"
-					value={inputEmail}
-					onChange={handleChangeInputEmail}
-				/>
-				<InputForm
-					type="password"
-					name="password"
-					placeholder="Password"
-					value={inputPassword}
-					onChange={handleChangeInputPassword}
-				/>
-				<BaseButton title="ログインする" onClick={handleSignIn} />
-			</BaseLayout>
+			<ThemeProvider theme={theme}>
+				<BaseLayout title="ログイン">
+					{!!validationErrors.length && (
+						<ValidationErrorBox messages={validationErrors} />
+					)}
+					<InputForm
+						name="email"
+						placeholder="例) test@example.com"
+						value={inputEmail}
+						onChange={handleChangeInputEmail}
+					/>
+					<InputForm
+						type="password"
+						name="password"
+						placeholder="Password"
+						value={inputPassword}
+						onChange={handleChangeInputPassword}
+					/>
+					<BaseButton title="ログインする" onClick={handleSignIn} />
+				</BaseLayout>
+			</ThemeProvider>
 		</>
 	);
 }
