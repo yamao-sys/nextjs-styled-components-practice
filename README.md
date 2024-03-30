@@ -12,6 +12,8 @@
 ## ちょっと難点
 - 2024/03/29時点では、Next.js 14ではCSS in JSがClient Componentオンリー
 - ThemeProviderを(Server Componentの)layout.tsxではなく、別途Client Componentのレイアウトコンポーネントを作成している
+  - → styled-jsxでlayoutに組み込めるかも
+  - https://nextjs.org/docs/app/building-your-application/styling/css-in-js#configuring-css-in-js-in-app
 
 ### 参考
 https://github.com/kimromi/notes/issues/28
