@@ -10,7 +10,8 @@
 - 共通のスタイル値はtheme.tsから使用
 
 ## ちょっと難点
-- ThemeProviderがClient Componentオンリーのためlayout.tsxではなく、別途レイアウトコンポーネントを作成している
+- 2024/03/29時点では、Next.js 14ではCSS in JSがClient Componentオンリー
+- ThemeProviderを(Server Componentの)layout.tsxではなく、別途Client Componentのレイアウトコンポーネントを作成している
 
 ### 参考
 https://github.com/kimromi/notes/issues/28
